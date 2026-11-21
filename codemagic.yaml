@@ -1,0 +1,22 @@
+workflows:
+  lightning-android:
+    name: Build Lightning APK
+    max_build_duration: 60
+    instance_type: mac_mini_m1
+    environment:
+      android_signing:
+        - LIGHTNING_RELEASE
+      vars:
+        CM_BUILD_TOOL: "gradle"
+      java: 17
+    scripts:
+      - name: Make gradlew executable
+        script: chmod +x ./gradlew
+      - name: Build APK
+        script: ./gradlew :app:assembleRelease
+    artifacts:
+      - app/build/outputs/apk/release/*.apk
+    publishing:
+      email:
+        recipients:
+          - your-email@gmail.com
