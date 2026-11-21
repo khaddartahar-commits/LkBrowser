@@ -1,0 +1,28 @@
+workflows:
+  android-release:
+    name: Build Lightning APK
+    max_build_duration: 60
+    environment:
+      android_signing:
+        - LIGHTNING_KEYSTORE
+      vars:
+        CM_EMAIL: "your-email@gmail.com"
+      java: 17
+    scripts:
+      - name: Set up local.properties
+        script: |
+          echo "sdk.dir=$ANDROID_HOME" > local.properties
+          
+      - name: Make gradlew executable
+        script: chmod +x ./gradlew
+        
+      - name: Build APK
+        script: ./gradlew :app:assembleRelease --stacktrace
+        
+    artifacts:
+      - app/build/outputs/apk/release/*.apk
+      - app/build/outputs/mapping/release/mapping.txt
+    publishing:
+      email:
+        recipients:
+          - $CM_EMAIL
