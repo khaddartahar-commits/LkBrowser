@@ -1,7 +1,7 @@
 workflows:
-  android-debug:
-    name: Build Lightning Debug
-    instance_type: linux  # <-- بدلناه من mac_mini_m1 الى linux
+  android-release:  # <-- بدل الاسم هذا
+    name: Build Lightning Release
+    instance_type: linux
     max_build_duration: 60
     environment:
       java: 21
