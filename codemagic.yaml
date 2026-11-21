@@ -1,6 +1,6 @@
 workflows:
-  android-release:  # <-- بدل الاسم هذا
-    name: Build Lightning Release
+  android-release:
+    name: Build Lightning APK
     instance_type: linux
     max_build_duration: 60
     environment:
@@ -8,7 +8,7 @@ workflows:
     scripts:
       - name: Grant permission
         script: chmod +x ./gradlew
-      - name: Build APK
+      - name: Build Debug APK
         script: ./gradlew assembleDebug
     artifacts:
       - app/build/outputs/apk/debug/*.apk
