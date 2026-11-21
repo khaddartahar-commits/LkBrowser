@@ -1,14 +1,14 @@
 workflows:
   android-release:
-    name: Build Lightning APK
-    instance_type: linux
+    name: Build LkBrowser APK
+    instance_type: linux  # مهم جدا: linux ماشي mac
     max_build_duration: 60
     environment:
       java: 21
     scripts:
-      - name: Grant permission
-        script: chmod +x ./gradlew
       - name: Build Debug APK
-        script: ./gradlew assembleDebug
+        script: |
+          chmod +x ./gradlew
+          ./gradlew assembleDebug
     artifacts:
-      - app/build/outputs/apk/debug/*.apk
+      - app/build/outputs/apk/debug/app-debug.apk
